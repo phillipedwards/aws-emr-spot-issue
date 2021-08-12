@@ -68,19 +68,13 @@ const cluster = new aws.emr.Cluster("example", {
                 weightedCapacity: 2,
             },
         ],
-        // launchSpecifications: {
-        //     spotSpecifications: [{
-        //         allocationStrategy: "capacity-optimized",
-        //         blockDurationMinutes: 0,
-        //         timeoutAction: "SWITCH_TO_ON_DEMAND",
-        //         timeoutDurationMinutes: 10,
-        //     }],
-        // },
         name: "core fleet",
         targetSpotCapacity: 2,
     },
 });
 
+// maximumOndemandCapacityunits: 0 
+// this property should translate to the managedScalingPolicy in AWS, however, see screen shot in repo
 new aws.emr.ManagedScalingPolicy("some-policy", {
     clusterId: cluster.id,
     computeLimits: [{
